@@ -1,0 +1,52 @@
+---
+import Button from "../components/Button.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+    <input type="checkbox" id="bg-toggle-2" class="bg-toggle-checkbox" />
+
+    <div class="page-card">
+        <h1>Página 2</h1>
+        <p>¡Bienvenido a la segunda sección del proyecto!</p>
+
+        <div class="actions">
+            <label for="bg-toggle-2">
+                <Button variant="secondary">
+                    Cambiar color de fondo
+                </Button>
+            </label>
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    .bg-toggle-checkbox {
+        display: none;
+    }
+
+    :has(.bg-toggle-checkbox:checked) {
+        --bg-gradient: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
+    }
+
+    .page-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+        text-align: center;
+    }
+
+    .actions {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    label {
+        cursor: pointer;
+        display: inline-block;
+    }
+</style>

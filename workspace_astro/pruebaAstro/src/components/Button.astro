@@ -1,0 +1,70 @@
+---
+interface Props {
+  as?: 'button' | 'label';
+  variant?: 'primary' | 'secondary' | 'danger';
+  for?: string;
+  id?: string;
+  class?: string;
+  [key: string]: any;
+}
+
+const {
+  as: Tag = 'button',
+  variant = 'primary',
+  for: htmlFor,
+  id,
+  class: className = '',
+  ...rest
+} = Astro.props;
+---
+
+<Tag 
+  id={id} 
+  for={Tag === 'label' ? htmlFor : undefined}
+  class:list={['btn', `btn-${variant}`, className]} 
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 600;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+  }
+
+  .btn-primary {
+    background-color: #0066cc;
+    color: #ffffff;
+    border-color: #0052a3;
+  }
+  .btn-primary:hover {
+    background-color: #0052a3;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+    border-color: #545b62;
+  }
+  .btn-secondary:hover {
+    background-color: #545b62;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #ffffff;
+    border-color: #bd2130;
+  }
+  .btn-danger:hover {
+    background-color: #bd2130;
+  }
+</style>
