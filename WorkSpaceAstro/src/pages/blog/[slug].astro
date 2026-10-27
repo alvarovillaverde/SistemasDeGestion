@@ -1,0 +1,42 @@
+---
+import { render } from "astro:content";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+    const post = await getCollection("posts");
+    return post.map((post) => ({
+        params: { slug: post.id },
+        props: { post },
+    }));
+}
+
+const post = Astro.props.post;
+const { Content } = await render(post);
+---
+
+<BaseLayout title="Mi Portafolio - Post">
+    <h1>Detalles del post</h1>
+    <h2>{post.data.titulo}</h2>
+    <p>{post.data.fecha} - {post.data.autor}</p>
+    {post.data.tags && post.data.tags.length > 0 && (
+        <div class="tags">
+            {post.data.tags.map(tag => <span class="tag">#{tag}</span>)}
+        </div>
+    )}
+    <Content />
+</BaseLayout>
+
+<style>
+    .tags {
+        margin: 1rem 0;
+    }
+    .tag {
+        display: inline-block;
+        background: #e2e8f0;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        margin-right: 0.5rem;
+        font-size: 0.875rem;
+    }
+</style>

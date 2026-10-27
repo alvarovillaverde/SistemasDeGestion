@@ -1,0 +1,16 @@
+---
+const title = Astro.props.title
+---
+
+<button aria-label={title} class="btn"> <slot/> </button>
+<style>
+			.btn{
+				background-color: yellowgreen;
+				color: white;
+				padding:10px 20px;
+				border-radius: 8px;
+			}
+			.btn:hover{
+				background-color: brown;
+			}
+		</style>
